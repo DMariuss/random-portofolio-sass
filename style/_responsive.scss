@@ -1,0 +1,78 @@
+
+//O varianta pentru a include receptivitatea folosind mixin-uri cu media queries si fiesiere .scss partiale
+
+// media query--  am aceste proprietati active cand latimea ecranului depaseste 768px 
+@include media-md{
+    .menu-btn{
+        visibility: hidden;
+    }
+    .nav{
+        visibility: visible;
+
+        .menu-nav{
+            transform: translateY(0);
+            display: block;  //aici am modificat pt se aplica alte proprietati (cele de flex nu mai sunt valabile)
+            height: 100%;
+            background: transparent;
+            text-align: right;
+
+            &__item{
+                // transform: translateX(0);  punand display inline pe aceste elemente se anuleaza efectele 
+                display: inline;
+                padding-right: 1.5rem;
+            }
+            &__link{
+                font-size: 1.5rem;
+            }
+        }
+    }
+    .about__bio{
+        font-size: 1.5rem;
+    }
+    .projects{
+        &__bio-image{
+            height: 40vh;
+        }
+        &__items{
+            grid-template-columns: repeat(2, 1fr); //pun aceste articole pe care 2 coloane de dimensiuni egale
+        }
+        .text-secondary{
+            font-size: 3rem;
+        }
+    }
+    .KP_Page{
+        .split{
+           flex-direction: row;
+           column-gap: 2em; // ---------nu functioneaza in safari (putem adauga margin-left: 2em elementelor--> .split > * + * {....} ) -----------
+
+            > *{   // selectez toate elementele direct descendente al parintelui split
+                flex-basis: 100%; // pentru a le da o dimensiune egala
+            }
+        }
+        .social-icons{
+            display: flex;
+            flex-direction: column;
+            transform: translateX(-10px);
+        }
+    }
+}
+@include media-lg{
+    .projects{
+        &__items{
+        grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    .contact__list{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .contact{
+        .social-icons{
+            margin-top: 4rem;
+        }
+    }
+}
+@include media-xl{
+    .projects__bio-image{
+        height: 50vh;
+    }
+}

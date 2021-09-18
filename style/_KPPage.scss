@@ -1,0 +1,105 @@
+
+//-----clasa utilitara------
+.secondary-color{
+    color: $secondary-color;
+}
+//-----clasa utilitara------
+.bg-light{
+    background-color: $color-light;
+    color: set-text-color($color-light);
+}
+//-----clasa utilitara------
+.bg-white{
+    background-color: $color-white;
+    color: set-text-color($color-white);
+}
+//-----clasa utilitara------
+.bg-primary{
+    background-color: $primary-color;
+    color: set-text-color($primary-color);
+}
+//-----clasa utilitara------
+.bg-secondary{
+    background-color: $secondary-color;
+    color: set-text-color($secondary-color);
+}
+//-----clasa utilitara------
+.text-center{
+    text-align: center;
+}
+//-----clasa utilitara------
+.container{
+    margin-inline: auto;
+    width: MIN( 90%, 70.5rem); //scrisa asa pt a folosi functia min() din CSS 
+
+    &__narrow{     //------------al doilea container cu latimea maxima de 25rem --------------
+        max-width: 25rem;   
+    }
+}
+ //------------ ^^^^^^^^^^^^^^^^ Aceste clase utilitare puteau fi puse mai degraba in fisierul partial config
+ // ----------- Tinand cont ca este o pagina separata, adaugata dupa, am inclus-o aici
+
+ .KP_Page{   //initial faceam referire folosind markup-ul "body", dar imi afecta celelalte pagini (aveam si specificitatea mai mare pt ca faceam referire folosind mai multi selectori)
+     font-size: 1.313rem;
+     line-height: 1.6;
+     
+     .title{
+        //  padding-top: 10rem;   
+        padding-block-start: 9rem;   //este aceeasi cu proprietatea de mai sus
+     }
+
+     h1, h2, h3 {
+        font-weight: 900; 
+        line-height: 1;
+     }
+
+     h2, h3, p {
+         margin-bottom: 1em;
+     }
+
+     img {
+         max-width: 100%;
+         display: block; // <----- pentru a inlatura spatiul mic ce apare sub fiecare imagine---------------
+     }
+     
+     section{
+         padding: 3rem 0;
+     }
+
+     .split {
+         display: flex;
+         flex-direction: column;
+     }
+     .title h1{
+         color: $secondary-color;
+     }
+ }
+ // -------------------In aceasta sectiune m-am jucat cu efectele ---------------------
+ .nav{
+     background-color: $primary-color;
+
+     li:last-child{
+         position: relative;
+     }
+     .arrow {
+        &::after{
+            content: '\27A4';
+            position: absolute;
+            right: 50%;
+            top: 100%;
+            transform: translate(50%, -50%) rotate(90deg);
+            opacity: 0;
+            transition:  all .15s ease-in-out;
+        }
+       &:hover::after{
+           opacity: 1;
+           transform: translate(50%, 0%) rotate(810deg);
+            }
+        }
+
+ }
+ 
+
+
+
+

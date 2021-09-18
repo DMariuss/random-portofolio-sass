@@ -1,0 +1,75 @@
+//Aici avem variabilele  si resetul  + o functie pentru stabilirea culorii textului (in cazul acesta in functie de culoarea fundalului)
+
+$primary-color: #272727;
+// $primary-color: #e5e5e5;
+$secondary-color: #ff652f;
+$color-light: #F3EED9;
+$color-white: #FFF;
+
+html{
+    box-sizing: border-box;
+}
+*, *::after, *::before{
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+@mixin transition-ease{
+    transition: all .5s ease-in-out;  //tranzitionam toate proprietatile pentru ca o voi folosi in mai multe instante
+}
+
+//functie pt stabilirea culorii --in cazul acesta al textului, in functie de culoarea de background(cea data ca variabila)
+@function set-text-color($color){
+    @if (lightness($color) > 40%) {
+        @return #000;
+    } @else {
+        @return #fff;
+    }
+}
+
+@mixin media-md{
+    @media screen and (min-width: 768px){
+        @content;  // <<<<<<-------- cand apelam mixinul, orice continut introdus acolo va fi adaugat aici
+    }
+}
+@mixin media-lg {
+    @media screen and (min-width: 1024px){
+        @content;
+    }
+}
+@mixin media-xl{
+    @media screen and (min-width: 1600px){
+        @content;
+    }
+}
+
+
+
+
+// ----------------------------------Using min-width
+
+// // Small devices (landscape phones, 576px and up)
+// @media (min-width: 576px) { ... }
+
+// // Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) { ... }
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) { ... }
+
+// // Extra large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) { ... }
+
+// --------------------------------------Using max-width
+
+// @media (max-width: 575.98px) { ... }
+
+// // Small devices (landscape phones, less than 768px)
+// @media (max-width: 767.98px) { ... }
+
+// // Medium devices (tablets, less than 992px)
+// @media (max-width: 991.98px) { ... }
+
+// // Large devices (desktops, less than 1200px)
+// @media (max-width: 1199.98px) { ... }

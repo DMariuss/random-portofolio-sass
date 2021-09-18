@@ -1,0 +1,118 @@
+@mixin bars{
+    position: absolute;
+    width: 28px;
+    height: 3px;
+    background: set-text-color($primary-color);
+    @include transition-ease;
+}  //aici am facut un mixin in care am pus proprietatile ce se repeta si le-am folosit mai jos
+
+
+// ----------------------In acest fisier partial SCSS lucrez asupra meniului de navigare ----------------------------
+.menu-btn{
+    position: absolute;
+    z-index: 1;
+    right: 1rem;
+    top: 1rem;
+    width: 28px;
+    height: 20px;
+    cursor: pointer;
+    @include transition-ease;
+
+    &__burger{
+        right: 0;
+        top: .5rem;
+        @include bars;
+        
+
+        &::before{
+            content: '';
+            top: -8px;
+            @include bars;
+        }
+        &::after{
+            content: '';
+            top: 8px;
+            @include bars;
+            width: 20px;  //suprascriu latimea
+        }
+
+        &.open{  //desemnam o clasa open pentru a o actiona in javascript
+            transform: rotate(720deg);
+            background: transparent;  //cand se activeaza linia din mijloc va deveni transparenta ---background-ul se suprascrie
+
+            &::before{
+                transform: rotate(45deg) translate(5px, 8px);  //rotim si le si mutam pt a forma un X
+            }
+            &::after{
+                width: 28px;
+                transform: rotate(-45deg) translate(3px, -7px);
+            }
+        }
+    }
+
+}
+
+.nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    opacity: .97;
+    visibility: hidden;  //probabil ca este adaugat pentru a nu vedea fragmente din acesta cand reincarcam pagina
+
+    &.open{    // -------------------Clasa OPEN se atribuie din JavaScript
+        visibility: visible;
+    }
+
+    .menu-nav{
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        background: $primary-color;
+        list-style: none;
+        padding-right: 1rem;
+        transform: translateY(-100%);
+
+        @include transition-ease;
+
+        &.open{                         //cand meniului nostru i se atribuie clasa .open face face ...
+            transform: translateY(0%);
+        }
+
+        &__item{
+            transform: translateX(100vw);
+
+            @include transition-ease;
+
+            &.open{
+                transform: translateX(0);
+            }
+            &.active > a{    //trebuie referit elem. de tip link pt a-i schimba culoare textului
+                color: $secondary-color;
+            }
+        }
+        &__link{
+            display: inline-block;
+            font-size: 2rem;
+            text-transform: uppercase;
+            padding: 2rem 0;
+            font-weight: 300;
+
+            @include transition-ease;
+
+            &:hover{
+                color: $secondary-color;
+            }
+        }
+    }
+}
+
+//adaugam delay pentru fiecare dintre linkuri
+@for $i from 1 through 5 {  // pentru fiecare link, de la 1 la 4 --pt ca avem 4 linkuri
+    .menu-nav__item:nth-child(#{$i}){  //pentru ca nu putem folosi direct variabila o punem intre #{$i}
+        transition-delay: ($i * 0.1s) + 0.15s;
+    }
+}

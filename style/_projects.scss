@@ -1,0 +1,98 @@
+.projects{
+    padding-bottom: 2rem;
+
+    &__bio-image{
+        height: 30vh;
+        width: 100%;
+        background:
+        linear-gradient(to right, rgba($primary-color, .9), rgba($primary-color, .3)),   //una dintre modalitatile pt a face imaginea mai intunecata 
+        url('../img/model-1.jpg') center top;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+
+        .text-secondary{
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+    }
+    
+
+    &__items{
+        width: 60vw;
+        margin: 2rem auto 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 2rem; 
+    }
+    &__item{
+        position: relative;
+        border-bottom: 5px solid $secondary-color;
+        overflow: hidden;   //realizam un efect incluzand pozitionarea si ascundem tot ce iese in afara
+        cursor: pointer;
+
+        img{
+            width: 100%;
+        }
+
+        &::after{
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: $secondary-color;
+            opacity: 0;
+
+            @include transition-ease;
+        }
+        &:hover{
+             &::after{
+                top: 0;       //ar fi de preferat sa folosim proprietatea transform: translate sau scale 
+                opacity: .9;
+            }
+            .projects__btn{   // mai jos facem opacity: 0 si aici il schimbam
+                opacity: 1;
+            }
+        }
+
+        
+
+    }
+
+    &__btns{
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        // background: red;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        text-align: center;
+    }
+    &__btn{
+        opacity: 0;
+        color: set-text-color($secondary-color);
+        @include transition-ease;
+
+        &:hover{
+            color: set-text-color(set-text-color($secondary-color)); //facem un fel de hack ---daca functia din paranteza intoarce cul. alba atunci prima
+            // opacity: 1; <<il pun pe intregul bloc --mai sus                  // va intoarce negru ;)
+            
+        }
+    }
+
+    .social-icons{
+        display: flex;
+        flex-direction: column;
+    }
+    
+}
+footer{
+    transform: rotate(90deg) translate(-3rem, -5rem);
+}
